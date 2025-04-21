@@ -47,7 +47,7 @@ def generate_incident():
     action_required = severity in {"HIGH", "CRITICAL"}
 
     text = (
-        f"Following a recent deployment, the {services} services started "
+        f"Following a recent deployment, the {service} services started "
         f"experiencing issues. Engineers observed {impact} caused by "
         f"{root_cause}. Immediate investigation was initiated."
     )
