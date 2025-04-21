@@ -13,6 +13,10 @@ __pycache__/
 venv/
 ENV/
 
+#############################
+# Ignore all raw data
+data/raw/*
+!data/raw/generate_incidents.py
 ########################################
 # IDE / Editor
 ########################################
