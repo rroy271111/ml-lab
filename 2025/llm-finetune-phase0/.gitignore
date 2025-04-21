@@ -1,0 +1,67 @@
+########################################
+# Python
+########################################
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.eggs/
+.env
+.venv
+venv/
+ENV/
+
+########################################
+# IDE / Editor
+########################################
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+########################################
+# OS
+########################################
+.DS_Store
+Thumbs.db
+
+########################################
+# Jupyter / Notebooks
+########################################
+.ipynb_checkpoints/
+
+########################################
+# LLM Phase 0 – Generated Data (IMPORTANT)
+########################################
+
+# Raw generated incidents
+2025/llm-finetune-phase0/data/raw/*.jsonl
+
+# Processed instruction datasets
+2025/llm-finetune-phase0/data/processed/*.jsonl
+2025/llm-finetune-phase0/data/eval/*.jsonl
+
+########################################
+# Training Artifacts (future-proofing)
+########################################
+
+# Model checkpoints
+**/checkpoints/
+**/outputs/
+**/runs/
+
+# Hugging Face / PEFT artifacts
+**/adapter_model/
+**/adapter_config.json
+**/*.bin
+**/*.safetensors
+
+########################################
+# Logs
+########################################
+*.log
+logs/
+
