@@ -1,14 +1,25 @@
-.PHONY: install test run lint format clean
+.PHONY: install test ingest bars train research lint format clean tree
+
+PYTHONPATH=src
 
 install:
 	pip install -e .
 	pip install pytest black ruff pre-commit
 
 test:
-	pytest -q
+	PYTHONPATH=$(PYTHONPATH) pytest -q tests
 
-run:
-	python -m financial_ml_tick_imbalance.pipeline.run_pipeline
+ingest:
+	PYTHONPATH=$(PYTHONPATH) python -m financial_ml_tick_imbalance.pipeline.ingest_tick_data
+
+bars:
+	PYTHONPATH=$(PYTHONPATH) python -m financial_ml_tick_imbalance.pipeline.build_imbalance_bars
+
+train:
+	PYTHONPATH=$(PYTHONPATH) python -m financial_ml_tick_imbalance.pipeline.train_model
+
+research:
+	PYTHONPATH=$(PYTHONPATH) python -m financial_ml_tick_imbalance.pipeline.full_research_pipeline
 
 lint:
 	ruff check src tests
@@ -19,3 +30,6 @@ format:
 clean:
 	find . -type d -name "__pycache__" -exec rm -rf {} +
 	find . -type f -name "*.pyc" -delete
+
+tree:
+	tree src/financial_ml_tick_imbalance
