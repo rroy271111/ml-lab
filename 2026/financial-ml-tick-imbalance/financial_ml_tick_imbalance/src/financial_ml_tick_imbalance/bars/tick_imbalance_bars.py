@@ -1,5 +1,5 @@
-from src.bars.tick_rule import compute_bt
-from src.utils.estimate_expectations import ewma
+from financial_ml_tick_imbalance.bars.tick_rule import compute_bt
+from financial_ml_tick_imbalance.utils.estimate_expectations import ewma
 
 
 def tick_imbalance_bars(prices, alpha=0.1, init_T=50):
