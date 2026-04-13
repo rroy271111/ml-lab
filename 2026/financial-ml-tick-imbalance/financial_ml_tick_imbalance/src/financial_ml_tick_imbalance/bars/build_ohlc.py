@@ -1,3 +1,6 @@
+import numpy as np
+
+
 def build_ohlc(prices, bars):
     ohlc = []
 
