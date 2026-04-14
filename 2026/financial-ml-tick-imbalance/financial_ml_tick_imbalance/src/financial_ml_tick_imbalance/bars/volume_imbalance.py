@@ -27,7 +27,8 @@ def volume_imbalance_bars(prices, volumes, alpha=0.1, init_T=50):
         if abs(theta) >= threshold:
             bars.append((start, i))
 
-            expectation_T = ewma(expectation_imbalance, theta / T)
+            expectation_T = ewma(expectation_T, T, alpha)
+            expectation_imbalance = ewma(expectation_imbalance, theta / T, alpha)
 
             start = i + 1
             theta = 0
