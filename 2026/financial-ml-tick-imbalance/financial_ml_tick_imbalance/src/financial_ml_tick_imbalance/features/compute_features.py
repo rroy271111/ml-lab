@@ -5,6 +5,6 @@ def compute_features(ohlc):
         ret = (bar["close"] - bar["open"]) / bar["open"]
         range_ = (bar["high"] - bar["low"]) / bar["open"]
 
-        features.append({"return": ret, "range": range, "length": bar["length"]})
+        features.append({"return": ret, "range": range_, "length": bar["length"]})
 
     return features
