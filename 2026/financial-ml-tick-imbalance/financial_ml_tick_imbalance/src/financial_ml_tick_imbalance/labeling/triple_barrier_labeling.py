@@ -20,3 +20,5 @@ def triple_barrier(prices, pt=0.01, sl=0.01, max_horizon=10):
                 break
 
         labels.append(label)
+
+    return labels
