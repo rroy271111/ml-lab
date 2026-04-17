@@ -3,7 +3,7 @@ import numpy as np
 
 def detect_regime(bar_lengths):
     regimes = []
-    average = np.mean(bar_lengths)
+    average = np.median(bar_lengths)
 
     for length in bar_lengths:
         if length < average * 0.5:
