@@ -7,6 +7,8 @@ TEACHER_MODEL = "Qwen/Qwen2.5-3B-Instruct"
 
 PROMPT_FILE = "../data/prompts.json"
 
+OUTPUT_FILE = "../data/distillation_dataset.jsonl"
+
 
 def load_teacher_model():
     tokenizer = AutoTokenizer.from_pretrained(TEACHER_MODEL)
@@ -35,3 +37,26 @@ def generate_response(tokenizer, model, prompt):
     decoded = tokenizer.decode(outputs[0], skip_special_tokens=True)
 
     return decoded
+
+
+def main():
+    prompts = load_prompts(PROMPT_FILE)
+    tokenizer, model = load_teacher_model()
+
+    dataset = []
+
+    for idx, prompt in enumerate(prompts):
+        print(f"Generating response {idx + 1} / {len(prompts)}")
+
+        response = generate_response(tokenizer, model, prompt)
+
+        sample = {"prompt": prompt, "response": response}
+
+        dataset.append(sample)
+    save_jsonl(dataset, OUTPUT_FILE)
+
+    print("Dataset generation complete")
+
+
+if __name__ == "__main__":
+    main()
