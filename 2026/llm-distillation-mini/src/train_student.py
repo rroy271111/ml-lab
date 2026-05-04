@@ -3,7 +3,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM, TrainingArguments
 
 from peft import LoraConfig, get_peft_model
 
-from trl import SFTrainer
+from trl import SFTTrainer
 from utils import load_jsonl
 
 STUDENT_MODEL = "TinyLlama/TinyLlama-1.1B-chat-v1.0"
@@ -65,7 +65,7 @@ def main():
         fp16=True,
     )
 
-    trainer = SFTrainer(model=model, train_dataset=dataset, args=training_args)
+    trainer = SFTTrainer(model=model, train_dataset=dataset, args=training_args)
 
     trainer.train()
 
