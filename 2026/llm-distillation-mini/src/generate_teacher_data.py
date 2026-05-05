@@ -1,13 +1,18 @@
+from pathlib import Path
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
 
+
 from utils import load_prompts, save_jsonl
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 TEACHER_MODEL = "Qwen/Qwen2.5-3B-Instruct"
 
-PROMPT_FILE = "../data/prompts.json"
+PROMPT_FILE = BASE_DIR / "data" / "prompts.json"
 
-OUTPUT_FILE = "../data/distillation_dataset.jsonl"
+OUTPUT_FILE = BASE_DIR / "data" / "distillation_dataset.jsonl"
 
 
 def load_teacher_model():
