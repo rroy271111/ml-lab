@@ -1,0 +1,4 @@
+outputs/
+*.safetensors
+checkpoints/
+.cache/
