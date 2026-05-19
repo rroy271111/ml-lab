@@ -11,6 +11,8 @@ def add_features(df: pd.DataFrame) -> pd.DataFrame:
 
     df["sma_7"] = df["Close"].rolling(7).mean()
 
+    df["sma_30"] = df["Close"].rolling(30).mean()
+
     df["volatility_7"] = df["returns"].rolling(7).std()
 
     df["day_of_week"] = df["Date"].dt.dayofweek
