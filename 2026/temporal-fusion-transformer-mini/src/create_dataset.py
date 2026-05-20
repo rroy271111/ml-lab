@@ -46,6 +46,21 @@ def main():
     print("\nKeys:")
     print(x.keys())
 
+    print("\nEncoder length:")
+    print(x["encoder_length"])
+
+    print("\nDecoder target shape:")
+    print(x["decoder_length"])
+
+    print("\nEncoder target shape:")
+    print(x["encoder_target"].shape)
+
+    print("\nContinuous feature shape:")
+    print(x["x_cont"].shape)
+
+    print("\nCategorical feature shape:")
+    print(x["x_cat"].shape)
+
     print()
     print("Number of samples:")
     print(len(training))
