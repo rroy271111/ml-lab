@@ -38,6 +38,14 @@ def main():
     )
     print(training)
 
+    x, y = training[0]
+
+    print("\nTarget:")
+    print(y)
+
+    print("\nKeys:")
+    print(x.keys())
+
     print()
     print("Number of samples:")
     print(len(training))
