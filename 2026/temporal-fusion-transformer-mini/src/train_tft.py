@@ -51,6 +51,23 @@ def main():
 
     print("Training cutoff:", training_cutoff)
 
+    training = create_dataset(
+        df[df.time_idx <= training_cutoff]
+    )
+
+    print("Training samples:")
+    print(len(training))
+
+    validation = TimeSeriesDataSet.from_dataset(
+        training,
+        df,
+        predict=True,
+        stop_randomization=True,
+    )
+
+    print("Validation samples:")
+    print(len(validation))
+
 if __name__ == "__main__":
     main()
 
