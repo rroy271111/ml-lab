@@ -1,19 +1,32 @@
 import pandas as pd
+import lightning as L
 
 from pytorch_forecasting import (
     TimeSeriesDataSet,
     TemporalFusionTransformer
 )
 
+from lightning.pytorch.callbacks import(
+    EarlyStopping,
+    LearningRateMonitor,
+)
+
+from lightning.pytorch.loggers import CSVLogger
+
+from pytorch_forecasting.metrics import RMSE
+
 DATA_PATH = "data/aapl_tft.csv" 
 
 MAX_ENCODER_LENGTH = 30
 MAX_PREDICTION_LENGTH = 7
 
+
+
 def create_dataset(df):
     return TimeSeriesDataSet(
         df,
         time_idx="time_idx",
+        target="Close",
         group_ids=["series"],
 
         max_encoder_length=MAX_ENCODER_LENGTH,
@@ -46,7 +59,7 @@ def main():
 
     training_cutoff = (
         df["time_idx"].max()
-        - MAX_ENCODER_LENGTH
+        - MAX_PREDICTION_LENGTH
     )
 
     print("Training cutoff:", training_cutoff)
@@ -67,6 +80,35 @@ def main():
 
     print("Validation samples:")
     print(len(validation))
+
+    train_dataloader = training.to_dataloader(
+        train=True,
+        batch_size=64,
+        num_workers=0,
+    )
+
+    val_dataloader = validation.to_dataloader(
+        train=False,
+        batch_size=64,
+        num_workers=0,
+    )
+
+    print("Train batches:", len(train_dataloader))
+    print("Validation batches:", len(val_dataloader))  
+
+    tft = TemporalFusionTransformer.from_dataset(
+    training, 
+    learning_rate=1e-3,
+    hidden_size=16,
+    attention_head_size=4,
+    dropout=0.1,
+    hidden_continuous_size=8,
+    loss=RMSE(),
+    log_interval=10,
+    reduce_on_plateau_patience=4,
+)
+    print(tft)
+
 
 if __name__ == "__main__":
     main()
