@@ -109,6 +109,28 @@ def main():
 )
     print(tft)
 
+    trainer = L.Trainer(
+        max_epochs=10,
+        accelerator="auto",
+        devices=1,
+        gradient_clip_val=0.1,
+        callbacks=[
+            EarlyStopping(
+                monitor="val_loss",
+                patience=5,
+                mode="min",
+            ),
+            LearningRateMonitor(),
+        ],
+        logger=CSVLogger("logs"),
+    )
+
+    trainer.fit(
+        tft,
+        train_dataloaders = train_dataloader,
+        val_dataloaders = val_dataloader,
+    )
+
 
 if __name__ == "__main__":
     main()
