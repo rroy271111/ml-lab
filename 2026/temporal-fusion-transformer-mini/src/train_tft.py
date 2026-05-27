@@ -1,5 +1,6 @@
 import pandas as pd
 import lightning as L
+ 
 
 from pytorch_forecasting import (
     TimeSeriesDataSet,
@@ -9,6 +10,7 @@ from pytorch_forecasting import (
 from lightning.pytorch.callbacks import(
     EarlyStopping,
     LearningRateMonitor,
+    ModelCheckpoint,
 )
 
 from lightning.pytorch.loggers import CSVLogger
@@ -109,11 +111,21 @@ def main():
 )
     print(tft)
 
+    # create callbacks
+    checkpoint_callback = ModelCheckpoint(
+        dirpath="checkpoints",
+        filename="best-tft",
+        monitor="val_loss",
+        mode="min",
+        save_top_k=1,
+    )
+
     trainer = L.Trainer(
         max_epochs=10,
         accelerator="auto",
         devices=1,
         gradient_clip_val=0.1,
+        log_every_n_steps=10,
         callbacks=[
             EarlyStopping(
                 monitor="val_loss",
@@ -121,6 +133,7 @@ def main():
                 mode="min",
             ),
             LearningRateMonitor(),
+            checkpoint_callback,
         ],
         logger=CSVLogger("logs"),
     )
@@ -130,6 +143,9 @@ def main():
         train_dataloaders = train_dataloader,
         val_dataloaders = val_dataloader,
     )
+
+    print("\nBest checkpoint:")
+    print(checkpoint_callback.best_model_path)
 
 
 if __name__ == "__main__":
