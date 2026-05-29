@@ -39,3 +39,11 @@ def create_dataset(df:pd.DataFrame) -> TimeSeriesDataSet:
 
         ],
     )
+
+def create_validation_dataset(training, df):
+    return TimeSeriesDataSet.from_dataset(
+        training,
+        df, 
+        predict=True,
+        stop_randomization=True,
+    )
