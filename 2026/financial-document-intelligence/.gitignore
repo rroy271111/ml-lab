@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# Environments
+.venv/
+venv/
+.env
+.env.*
+
+# IDE
+.vscode/
+.idea/
+
+# Data
+data/raw/*
+data/processed/*
+artifacts/*
+
+# Preserve directory structures
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/samples/.gitkeep
+
+# Generated artifacts
+!artifacts/.gitkeep
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Logs
+logs/
+*.log
+
+# Notebooks
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
