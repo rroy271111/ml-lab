@@ -1,0 +1,13 @@
+project:
+    name: financial-document-intelligence
+    environment: development
+document:
+    supported_formats:
+        - pdf
+
+processing:
+    output_directory: artifacts
+    preserve_original: true
+
+logging:
+    level: INFO

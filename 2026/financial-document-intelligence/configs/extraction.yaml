@@ -1,0 +1,12 @@
+extraction:
+    text:
+        enabled: true
+
+    tables:
+        enabled: false
+
+    ocr:
+        enabled: false
+
+    metadata:
+        enabled: true
